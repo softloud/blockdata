@@ -1,16 +1,18 @@
 # blockdata
 
-`blockdata` is a data package for analyses in `blockhole`. It is intended to contain observations from a livestream documenting a 420 × 420 Minecraft hole dug for the perimeter of a Nether farm. The observation details, livestream reference, and source attribution still need to be added.
+`blockdata` is a data package for analyses in `blockhole`. It contains observations from a livestream documenting a Minecraft hole dug for the perimeter of a Nether farm. The raw spreadsheet is linked from [`raw-data/README.md`](raw-data/README.md); the livestream reference and fuller context still need to be documented.
 
 ## Repository layout
 
 - `raw-data/` — source observations and other unprocessed data.
+- `raw-data/README.md` — source spreadsheet link.
 - `renv.lock` — pinned R package versions.
 - `renv/` and `.Rprofile` — project-local R environment activation.
+- `LICENSE` — MIT license.
 
 ## Website
 
-The data package is documented via `pkgdown`.
+> TODO: The data package is documented via `pkgdown`.
 
 ## Set up
 
