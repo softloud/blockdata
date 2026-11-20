@@ -3,20 +3,26 @@
 We are a mix:
 
 - Jamie is senior and experienced but has only dabbled in R
-- Zach is an applied scientist who uses R, we are creating this in R for him
+- Zach is an applied scientist who uses R, we are creating this in R to be
+  accessible to him, and to demo how he might structure his research project
 - Charles is senior and experienced with extensive R knowledge
 
 # data package
 
-This is a lightweight package intended for use in just one analysis. 
+We will follow good enough practices for this, but in the context of:
 
-We will favour brevity and accessibility in code, as we are mostly experienced.
+- This is a lightweight package intended for use in just one analysis. 
+- We will favour brevity and accessibility in code, as we are mostly 
+  experienced.
+- This is not production grade, we do not need to handle every exception and 
+  think of every user error. 
+- The intentionality of it being a data package is to make usage smoother in the
+  analysis in blockhole, not submit to CRAN. 
+- We love being FAIR, but not exhaustive.
 
-This is not production grade, we do not need to handle every exception and think
-of every user error. 
+# .gitignore
 
-The intentionality of it being a data package is to make usage smoother in the
-analysis, not submit to CRAN. 
+Help us maintain this.
 
 # README
 

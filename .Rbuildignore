@@ -1,0 +1,6 @@
+^AGENTS\.md$
+^data-architecture$
+^data-raw$
+^renv$
+^renv\.lock$
+^\.Rprofile$
