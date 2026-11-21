@@ -1,11 +1,13 @@
 Package: blockdata
-Title: Raw Data Extractions for Blockhole Analyses
+Title: Stream Observations and Estimates for Blockhole Analyses
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Charles T.", "Gray", role = c("aut", "cre")),
+    person("Charles T.", "Gray", email = "charlestigray@gmail.com", role = c("aut", "cre")),
     person("Jamie", "Gumbrell", role = "aut")
     )
-Description: Internal raw spreadsheet extractions for analyses in 'blockhole'.
+Description: Date-indexed stream observations and estimates for analyses in 'blockhole'.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Suggests: devtools
+LazyData: true
+Suggests: devtools, janitor, roxygen2
+Config/roxygen2/version: 8.1.1

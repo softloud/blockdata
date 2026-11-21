@@ -4,9 +4,11 @@
 
 ## Repository layout
 
-- `DESCRIPTION`, `NAMESPACE`, and `R/` — R package metadata and internal datasets.
+- `DESCRIPTION`, `NAMESPACE`, and `R/` — package metadata, internal source ranges, and dataset documentation.
+- `data/` — public analysis datasets, `stream_obs` and `stream_estimate`.
 - `data-raw/` — source CSV, its spreadsheet reference, and the extraction script.
-- `data-raw/extract.R` — rebuilds three internal source-range extracts.
+- `data-raw/extract.R` — rebuilds internal ranges and public analysis datasets.
+- `man/` — help pages generated from dataset documentation.
 - `data-architecture/` — lineage diagram and architecture notes.
 - `renv.lock` — pinned R package versions.
 - `renv/` and `.Rprofile` — project-local R environment activation.
@@ -14,7 +16,7 @@
 
 ## Data architecture
 
-See [data architecture](data-architecture/README.md) for the selected source ranges and the two planned analysis datasets.
+See [data architecture](data-architecture/README.md) for the source ranges, dataset contents, and calculation notes.
 
 ## Website
 
@@ -36,17 +38,18 @@ Open R in the repository root. Use `load_all()` to load the working package into
 devtools::load_all()
 ```
 
-Use `devtools::install()` when you want to install the package into the active library. The intended analysis datasets are `stream_obs` and `stream_estimate`; they are not implemented yet. See [data architecture](data-architecture/README.md) for their planned contents.
+Use `devtools::install()` when you want to install the package into the active library. The public datasets are available as `blockdata::stream_obs` and `blockdata::stream_estimate`.
 
-## Rebuild current extracts
+## Rebuild datasets and documentation
 
-Run this from the repository root after updating the source CSV in `data-raw/`:
+Run these from the repository root after updating the source CSV in `data-raw/` or changing the extraction code:
 
 ```sh
 Rscript data-raw/extract.R
+Rscript -e 'roxygen2::roxygenise()'
 ```
 
-The script uses base R and writes the three selected source-range objects to `R/sysdata.rda`. The analysis datasets shown in the architecture diagram are a later step.
+The extraction script writes three internal source-range objects to `R/sysdata.rda` and the two public datasets to `data/`. The `FIRST_STREAM_YEAR` setting near the top of the script is a provisional 2016; Jamie can update that single line when the source year is confirmed.
 
 To add an R package dependency, install it into the project library and record it in `renv.lock`:
 
@@ -59,7 +62,7 @@ After pulling a lockfile change, run `renv::restore()` to sync your local librar
 
 See the [`renv` documentation](https://rstudio.github.io/renv/articles/renv.html) for details.
 
-After installing a development dependency such as `devtools`, run `renv::snapshot()` and commit the updated `renv.lock` so collaborators can restore it.
+After adding a development dependency, run `renv::snapshot()` and commit the updated `renv.lock` so collaborators can restore it.
 
 ## License
 
