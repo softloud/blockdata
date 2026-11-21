@@ -1,0 +1,29 @@
+digraph darch {
+  edge [color=lightgrey]
+  node [shape=none, fontcolor=grey]
+  rankdir=BT
+  labelloc="t"
+
+  subgraph cluster_excel {
+  label=<<I>Data sets extracted from raw</I>>
+  style=dotted
+    a1_i189
+    r27_w189
+    n1_q189
+
+  }
+
+  subgraph cluster_analytic {
+  label=<<I>Cleaned analytic data</I>>
+  style=dotted
+  node [fontcolor=black]
+    
+    stream_obs
+    stream_estimate
+  }
+
+  a1_i189 -> stream_obs
+  r27_w189 -> stream_estimate
+  n1_q189 -> stream_obs
+
+}
