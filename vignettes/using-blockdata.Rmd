@@ -1,0 +1,50 @@
+---
+title: "Use blockdata in an analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Use blockdata in an analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+`blockdata` provides two date-indexed datasets about streams documenting the excavation of a Minecraft hole for a Nether farm perimeter. Jamie Gumbrell collected and recorded the stream observations. The estimates are retained separately from the source spreadsheet.
+
+## Install
+
+Install the package from GitHub with `pak` (install `pak` once if needed):
+
+```r
+if (!requireNamespace("pak", quietly = TRUE)) {
+  install.packages("pak")
+}
+pak::pak("softloud/blockdata")
+```
+
+If you already use `devtools`, `devtools::install_github("softloud/blockdata")` also works. Current devtools documentation recommends `pak::pak()`.
+
+## Stream observations
+
+`stream_obs` has one row per stream date. Its first six fields are the recorded date, total minutes, blocks mined, method, pick start, and pick end. The remaining fields split the duration and calculate stream-level and cumulative rates and totals.
+
+```{r stream-obs}
+observations <- blockdata::stream_obs
+
+head(observations[c(
+  "date", "total_minutes", "total_blocks_mined", "method",
+  "pick_start", "pick_end", "blocks_per_hour"
+)])
+```
+
+The date year is provisional: the package currently uses 2016 as the start year. Jamie can update the `FIRST_STREAM_YEAR` line in `data-raw/extract.R` when the year is confirmed. The meanings of the pick-start and pick-end readings are also awaiting Jamie's clarification.
+
+## Spreadsheet estimates
+
+`stream_estimate` keeps the spreadsheet's estimates alongside their dates. These values are not recalculated by the package. The average-rate fields and the interpretation of the source's blank-header column are documented as inferences, so they remain distinguishable from confirmed source meanings.
+
+```{r stream-estimate}
+estimates <- blockdata::stream_estimate
+
+head(estimates)
+```
+
+The estimates begin later than the observations, so not every `stream_obs` date has a corresponding estimate. See the [dataset reference for `stream_obs`](../reference/stream_obs.html) and the [dataset reference for `stream_estimate`](../reference/stream_estimate.html) for field details.

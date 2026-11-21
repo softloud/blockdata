@@ -9,5 +9,7 @@ Description: Date-indexed stream observations and estimates for analyses in 'blo
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: devtools, janitor, roxygen2
+Suggests: devtools, janitor, knitr, rmarkdown, roxygen2
+VignetteBuilder: knitr
 Config/roxygen2/version: 8.1.1
+URL: https://softloud.github.io/blockdata/

@@ -1,0 +1,67 @@
+---
+title: "Develop the blockdata package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Develop the blockdata package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This guide covers the local workflow for editing the package, rebuilding its datasets, and inspecting the source ranges. The repository's [README](https://github.com/softloud/blockdata#readme) has the initial R and `renv` setup steps.
+
+## Load the local package
+
+From the repository root, restore the project library after cloning or pulling dependency changes:
+
+```sh
+Rscript -e 'renv::restore()'
+```
+
+In an R session opened in the repository, load the current source package:
+
+```r
+devtools::load_all()
+```
+
+Run `load_all()` again after changing package code or data. This loads the working copy without needing to reinstall it.
+
+## Rebuild the datasets
+
+The source CSV and extraction script are in `data-raw/`. After updating the CSV or extraction code, run these commands from the repository root:
+
+```sh
+Rscript data-raw/extract.R
+Rscript -e 'roxygen2::roxygenise()'
+```
+
+The script writes selected source ranges to `R/sysdata.rda` and rebuilds the public datasets in `data/`. The line `FIRST_STREAM_YEAR <- 2016L` near the top of `data-raw/extract.R` is a provisional year. Jamie can change that one line in a pull request once the source year is confirmed.
+
+## Inspect internal source ranges
+
+The source ranges are internal package data. After `devtools::load_all()`, they can be inspected with triple-colon access:
+
+```r
+blockdata:::a1_i189
+blockdata:::n1_q189
+blockdata:::r27_w189
+```
+
+These objects preserve selected spreadsheet cells as character values. They are useful for tracing the extraction, while analyses should generally use the documented public datasets `blockdata::stream_obs` and `blockdata::stream_estimate`.
+
+## Update dependencies and check the package
+
+After adding a development dependency, install it into the project library and update the lockfile:
+
+```r
+renv::install("package")
+renv::snapshot()
+```
+
+Before opening a pull request, build and check the package:
+
+```r
+devtools::build()
+devtools::check()
+```
+
+To rebuild the pkgdown site locally, run `pkgdown::build_site()` from the repository root.
