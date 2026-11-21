@@ -1,20 +1,21 @@
 # Data architecture
 
-The package separates source extractions from semantic datasets. The diagram shows the planned data flow:
+The package will provide two analysis-ready datasets directly from selected ranges in the source sheet. There is no separate semantic-data stage. The diagram shows the planned flow:
 
-![Data lineage from the raw spreadsheet extractions to the semantic stream dataset](data-architecture.png)
+![Selected spreadsheet ranges feeding the stream observations and estimates datasets](data-architecture.png)
 
-## Source layer
+## Selected source ranges
 
-Source extraction names describe the spreadsheet range they cover. For example, `a1_j51` represents cells `A1:J51`; `a52_l189` represents `A52:L189`.
+Source range names describe the spreadsheet cells they cover: `a1_j51` is `A1:J51`, `a52_l189` is `A52:L189`, `n1_q189` is `N1:Q189`, and `r27_w189` is `R27:W189`. These ranges capture the date-associated stream observations and estimates selected for analysis; they are not intended to reproduce every populated cell in the sheet.
 
-Raw extractions are internal package data, available for inspection with triple-colon access, such as `blockdata:::a1_j51`. They are not part of the documented public interface. The extraction script uses the spreadsheet's first row as column names, keeps cell values as character data, and does not clean or transform the values. Thus `a1_j51` contains rows 2–51 as data with row 1 as its column names; `a52_l189` contains rows 52–189 with column names taken from row 1.
+The source ranges are packaged internally as character data and can be inspected during development with triple-colon access, for example `blockdata:::a1_j51`. The extraction uses row 1 for observation field names and row 27 for estimate headings, omitting those header rows from the data. `a52_l189` uses the observation field names from row 1 even though its range starts at row 52. Stream records use the date in column A; the date is not a complete calendar date because the source omits the year. Estimate values must be matched to the corresponding stream rows.
 
-## Semantic layer
+## Analysis datasets
 
-Semantic datasets are named for their grain; e.g., `stream` indicates a dataset of one row per stream. The planned `stream` dataset is cleaned and transformed from the source extractions and will be available through the public package interface as `blockdata::stream`. pkgdown documentation should focus on these semantic datasets.
+- `stream_obs` — one row per observed stream, combining the selected observation fields from `a1_j51`, `a52_l189`, and `n1_q189`.
+- `stream_estimate` — stream estimates from `r27_w189`, matched to the stream date.
 
-The initial package work covers the package scaffold and source extraction datasets. The semantic `stream` dataset is a later step.
+These are the planned analysis datasets and public package interface. The current extraction script builds the four internal source-range objects; building these analysis datasets is a later step.
 
 ## Regenerate the diagram
 

@@ -6,7 +6,7 @@
 
 - `DESCRIPTION`, `NAMESPACE`, and `R/` — R package metadata and internal datasets.
 - `data-raw/` — source CSV, its spreadsheet reference, and the extraction script.
-- `data-raw/extract.R` — rebuilds the internal datasets from the source CSV.
+- `data-raw/extract.R` — rebuilds four internal source-range extracts.
 - `data-architecture/` — lineage diagram and architecture notes.
 - `renv.lock` — pinned R package versions.
 - `renv/` and `.Rprofile` — project-local R environment activation.
@@ -14,7 +14,7 @@
 
 ## Data architecture
 
-See [data architecture](data-architecture/README.md) for the lineage diagram, source range naming convention, and the planned package interface for raw and semantic datasets.
+See [data architecture](data-architecture/README.md) for the selected source ranges and the two planned analysis datasets.
 
 ## Website
 
@@ -34,12 +34,11 @@ Open R in the repository root. Use `load_all()` to load the working package into
 
 ```r
 devtools::load_all()
-blockdata:::a1_j51
 ```
 
-Use `devtools::install()` when you want to install the package into the active library. The package currently has no exported objects; both raw extractions are internal. See [data architecture](data-architecture/README.md) for the planned interface and dataset names.
+Use `devtools::install()` when you want to install the package into the active library. The intended analysis datasets are `stream_obs` and `stream_estimate`; they are not implemented yet. See [data architecture](data-architecture/README.md) for their planned contents.
 
-## Rebuild raw extractions
+## Rebuild current extracts
 
 Run this from the repository root after updating the source CSV in `data-raw/`:
 
@@ -47,7 +46,7 @@ Run this from the repository root after updating the source CSV in `data-raw/`:
 Rscript data-raw/extract.R
 ```
 
-The script uses base R and writes the internal data objects to `R/sysdata.rda`.
+The script uses base R and writes the four selected source-range objects to `R/sysdata.rda`. The analysis datasets shown in the architecture diagram are a later step.
 
 To add an R package dependency, install it into the project library and record it in `renv.lock`:
 

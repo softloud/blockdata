@@ -9,22 +9,23 @@ digraph darch {
   style=dotted
     a1_j51
     a52_l189
-    r27_w50
+    r27_w189
     n1_q189
 
   }
 
-  subgraph cluster_semantic {
-  label=<<I>Cleaned and transformed semantic data</I>>
+  subgraph cluster_analytic {
+  label=<<I>Cleaned analytic data</I>>
   style=dotted
   node [fontcolor=black]
     
-    stream
+    stream_obs
+    stream_estimate
   }
 
-  a1_j51 -> stream
-  a52_l189 -> stream
-  r27_w50 -> stream
-  n1_q189 -> stream
+  a1_j51 -> stream_obs
+  a52_l189 -> stream_obs
+  r27_w189 -> stream_estimate
+  n1_q189 -> stream_obs
 
 }
