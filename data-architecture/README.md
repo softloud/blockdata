@@ -1,6 +1,6 @@
 # Data architecture
 
-The package provides two analysis-ready datasets directly from selected ranges in the source sheet. There is no separate semantic-data stage. The diagram shows the flow:
+Jamie Gumbrell collected and recorded the stream observations while documenting the excavation of a Minecraft hole for a Nether farm perimeter. The package provides two analysis-ready datasets from selected ranges in the source sheet: Jamie's date-indexed observations and the estimates retained from the spreadsheet. There is no separate semantic-data stage. The diagram shows the flow:
 
 ![Selected spreadsheet ranges feeding the stream observations and estimates datasets](data-architecture.png)
 
@@ -15,7 +15,7 @@ The source ranges are packaged internally as character data and can be inspected
 - `stream_obs` — one row per observed stream, combining the selected observation fields from `a1_i189` and `n1_q189`. Core fields are date, total minutes, total blocks mined, method, pick start, and pick end; calculated duration, rates, and cumulative totals follow them.
 - `stream_estimate` — source estimates from `r27_w189`, matched to the stream date. Column T has no source heading; its interpretation as estimated hours at the average rate is an inference and remains open for Jamie to confirm.
 
-These are the public package datasets, available as `blockdata::stream_obs` and `blockdata::stream_estimate`. The extraction script builds them alongside the three internal source-range objects. Their help pages describe the source, field coverage, calculations, and provisional interpretations.
+These are the public package datasets, available as `blockdata::stream_obs` and `blockdata::stream_estimate`. Jamie collected the observations; the estimate dataset preserves spreadsheet estimates separately for comparison and does not recalculate them. The extraction script builds both alongside the three internal source-range objects. Their help pages describe the source, field coverage, calculations, and provisional interpretations.
 
 ## Regenerate the diagram
 
@@ -25,4 +25,4 @@ The diagram source is [`data-lineage.dot`](data-lineage.dot). With [Graphviz](ht
 bash data-architecture/render-diagram.sh
 ```
 
-This writes `data-architecture.png` beside the DOT source.
+This writes `data-architecture.png` beside the DOT source and copies it to `man/figures/data-architecture.png` for the package website and documentation.

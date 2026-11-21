@@ -33,8 +33,9 @@ stream_obs
 }
 \description{
 Date-indexed records of streams documenting excavation of a Minecraft hole
-for a Nether farm. The source records span November 2016 to August 2017 using
-a provisional start year of 2016; update `FIRST_STREAM_YEAR` in
-`data-raw/extract.R` when Jamie confirms the year.
+for a Nether farm. Jamie Gumbrell collected and recorded these observations.
+The source records span November 2016 to August 2017 using a provisional
+start year of 2016; update `FIRST_STREAM_YEAR` in `data-raw/extract.R` when
+Jamie confirms the year.
 }
 \keyword{datasets}

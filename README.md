@@ -18,51 +18,26 @@
 
 See [data architecture](data-architecture/README.md) for the source ranges, dataset contents, and calculation notes.
 
+## Guides
+
+- [Use the package in an analysis](vignettes/using-blockdata.Rmd).
+- [Develop the package](vignettes/developing-blockdata.Rmd).
+
 ## Website
 
-> TODO: The data package is documented via `pkgdown`.
+The [pkgdown site](https://softloud.github.io/blockdata/) presents the data overview and dataset documentation.
 
 ## Set up
 
-Install [R 4.6.1](https://cran.r-project.org/) and clone this repository. From the repository root, restore the project library:
+Install [R 4.6.1](https://cran.r-project.org/), clone the repository, and restore its project library:
 
 ```sh
+git clone https://github.com/softloud/blockdata.git
+cd blockdata
 Rscript -e 'renv::restore()'
 ```
 
-## Develop with devtools
-
-Open R in the repository root. Use `load_all()` to load the working package into the current session; rerun it after code or data changes:
-
-```r
-devtools::load_all()
-```
-
-Use `devtools::install()` when you want to install the package into the active library. The public datasets are available as `blockdata::stream_obs` and `blockdata::stream_estimate`.
-
-## Rebuild datasets and documentation
-
-Run these from the repository root after updating the source CSV in `data-raw/` or changing the extraction code:
-
-```sh
-Rscript data-raw/extract.R
-Rscript -e 'roxygen2::roxygenise()'
-```
-
-The extraction script writes three internal source-range objects to `R/sysdata.rda` and the two public datasets to `data/`. The `FIRST_STREAM_YEAR` setting near the top of the script is a provisional 2016; Jamie can update that single line when the source year is confirmed.
-
-To add an R package dependency, install it into the project library and record it in `renv.lock`:
-
-```r
-renv::install("package")
-renv::snapshot()
-```
-
-After pulling a lockfile change, run `renv::restore()` to sync your local library.
-
-See the [`renv` documentation](https://rstudio.github.io/renv/articles/renv.html) for details.
-
-After adding a development dependency, run `renv::snapshot()` and commit the updated `renv.lock` so collaborators can restore it.
+See [Develop the package](vignettes/developing-blockdata.Rmd) for the local development workflow, data rebuild commands, and dependency updates. After pulling a lockfile change, run `renv::restore()` to sync your local library. See the [`renv` documentation](https://rstudio.github.io/renv/articles/renv.html) for details.
 
 ## License
 
