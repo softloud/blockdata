@@ -7,8 +7,7 @@ digraph darch {
   subgraph cluster_excel {
   label=<<I>Data sets extracted from raw</I>>
   style=dotted
-    a1_j51
-    a52_l189
+    a1_i189
     r27_w189
     n1_q189
 
@@ -23,8 +22,7 @@ digraph darch {
     stream_estimate
   }
 
-  a1_j51 -> stream_obs
-  a52_l189 -> stream_obs
+  a1_i189 -> stream_obs
   r27_w189 -> stream_estimate
   n1_q189 -> stream_obs
 

@@ -6,7 +6,7 @@
 
 - `DESCRIPTION`, `NAMESPACE`, and `R/` — R package metadata and internal datasets.
 - `data-raw/` — source CSV, its spreadsheet reference, and the extraction script.
-- `data-raw/extract.R` — rebuilds four internal source-range extracts.
+- `data-raw/extract.R` — rebuilds three internal source-range extracts.
 - `data-architecture/` — lineage diagram and architecture notes.
 - `renv.lock` — pinned R package versions.
 - `renv/` and `.Rprofile` — project-local R environment activation.
@@ -46,7 +46,7 @@ Run this from the repository root after updating the source CSV in `data-raw/`:
 Rscript data-raw/extract.R
 ```
 
-The script uses base R and writes the four selected source-range objects to `R/sysdata.rda`. The analysis datasets shown in the architecture diagram are a later step.
+The script uses base R and writes the three selected source-range objects to `R/sysdata.rda`. The analysis datasets shown in the architecture diagram are a later step.
 
 To add an R package dependency, install it into the project library and record it in `renv.lock`:
 
